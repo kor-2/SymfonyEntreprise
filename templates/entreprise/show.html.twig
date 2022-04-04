@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'une entreprise{% endblock %}
+
+{% block body %}
+<h1>{{ entreprise }}</h1>
+
+<p>
+    Siret : {{ entreprise.siret }} <br>
+    Adresse : {{ entreprise.AdresseComplet }} <br>
+    Date de création : {{ entreprise.DateCreation | date('d/m/Y') }} <br>
+</p>
+
+<h2>Employé ({{ entreprise.employes | length }})</h2>
+
+{% for employe in entreprise.employes %}
+    {{ employe }}
+{% endfor %}
+
+{% endblock %}
