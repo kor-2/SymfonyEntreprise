@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Form\EntrepriseType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,6 +21,20 @@ class EntrepriseController extends AbstractController
 
         return $this->render('entreprise/index.html.twig', [
             'entreprises' => $entreprises,
+        ]);
+    }
+
+    /**
+     * @Route("/entreprise/add", name="add_entreprise")
+     */
+    public function add(Request $request): Response
+    {
+        $entreprise = new Entreprise();
+
+        $form = $this->createForm(EntrepriseType::class, $entreprise);
+
+        return $this->render('entreprise/add.html.twig', [
+            'addEntreprise' => $form->createView(),
         ]);
     }
 

@@ -14,7 +14,7 @@
 <h2>Employé ({{ entreprise.employes | length }})</h2>
 
 {% for employe in entreprise.employes %}
-    {{ employe }}
+    <a href="{{ path('show_employe', { 'id' : employe.id}) }}">{{ employe }}</a> <br>
 {% endfor %}
 
 {% endblock %}

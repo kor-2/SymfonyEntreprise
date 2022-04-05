@@ -5,9 +5,9 @@
 {% block body %}
 
     <h1>Liste des entreprises</h1>
-
+    <a href="{{ path('add_entreprise') }}">Ajouter entreprise</a> <br>
     {% for entreprise in entreprises %}
-        <a href="{{ path('show_entreprise', {'id': entreprise.id }) }}">{{ entreprise }}</a>{{ entreprise.AdresseComplet ~ ' '~ entreprise.DateCreation | date('d/m/Y')}} <br>
+        <a href="{{ path('show_entreprise', {'id': entreprise.id }) }}">{{ entreprise }}</a> {{ entreprise.AdresseComplet ~ ' '~ entreprise.DateCreation | date('d/m/Y')}} <br>
     {% endfor %}
 
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'un employé{% endblock %}
+
+{% block body %}
+
+
+<h1>{{ employe }}</h1>
+
+<p>
+    Adresse: {{ employe.AdresseComplet }} <br>
+    Travail à : <a href="{{ path('show_entreprise', {'id': employe.Entreprise.id }) }}">{{ employe.Entreprise }}</a>
+</p>
+
+
+{% endblock %}
