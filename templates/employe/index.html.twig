@@ -5,12 +5,31 @@
 {% block body %}
 
 
-<h1>Liste des employés</h1>
+<h1>Liste des employés ({{ employes | length }})</h1>
 
-<a href="{{ path('add_employe') }}">Ajouter employé</a><br>
+<a class="uk-button uk-button-primary" href="{{ path('add_employe') }}">Ajouter employé</a><br>
 
-{% for employe in employes %}
-    <a href="{{ path('show_employe', { 'id' : employe.id}) }}">{{ employe }}</a>{{ ' (' ~ employe.entreprise ~ ')' }}
-    <a href="{{ path('del_employe', {'id': employe.id }) }}">Supprimer</a> <a href="{{ path('update_employe', {'id': employe.id }) }}">Modier</a><br>
-{% endfor %}
+
+<table class="uk-table uk-table-striped uk-table-middle uk-text-center">
+    <thead>
+        <tr>
+            <th class="uk-text-center">Nom</th>
+            <th class="uk-text-center">Entreprise</th>
+            <th class="uk-text-center">Supprimer</th>
+            <th class="uk-text-center">Modifier</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for employe in employes %}
+        <tr>
+            <td><a href="{{ path('show_employe', { 'id' : employe.id}) }}">{{ employe }}</a></td>
+            <td><a href="{{ path('show_entreprise', { 'id' : employe.entreprise.id}) }}">{{ employe.entreprise }}</a></td>
+            <td><a uk-icon="icon: close" href="{{ path('del_employe', {'id': employe.id }) }}"></a></td>
+            <td><a uk-icon="icon: pencil" href="{{ path('update_employe', {'id': employe.id }) }}"></a></td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
 {% endblock %}

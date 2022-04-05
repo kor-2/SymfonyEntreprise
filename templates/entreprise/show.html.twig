@@ -5,16 +5,39 @@
 {% block body %}
 <h1>{{ entreprise }}</h1>
 
-<p>
-    Siret : {{ entreprise.siret }} <br>
-    Adresse : {{ entreprise.AdresseComplet }} <br>
-    Date de création : {{ entreprise.DateCreation | date('d/m/Y') }} <br>
-</p>
+
+<ul class="uk-list">
+    <li>
+        <span class="uk-text-bold">Date de céation: </span>{{ entreprise.DateCreation | date('d/m/Y') }} ({{ entreprise.age }})
+    </li>
+    <li>
+        <span class="uk-text-bold">Adresse: </span>{{ entreprise.AdresseComplet }}
+    </li>
+</ul>
+
+<a class="uk-button uk-button-primary" uk-icon="icon: pencil" href="{{ path('update_entreprise', {'id': entreprise.id }) }}"></a>
 
 <h2>Employé ({{ entreprise.employes | length }})</h2>
 
-{% for employe in entreprise.employes %}
-    <a href="{{ path('show_employe', { 'id' : employe.id}) }}">{{ employe }}</a> <br>
-{% endfor %}
+
+<table class="uk-table uk-table-striped uk-table-middle">
+    <thead>
+        <tr>
+            <td>Nom</td>
+            <td>Date d'embauche</td>
+            <td colspan="2">Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+            {% for employe in entreprise.employes %}
+            <tr>
+                <td><a href="{{ path('show_employe', { 'id' : employe.id}) }}">{{ employe }}</a></td>
+                <td>{{ employe.DateEmbauche | date('d/m/Y') }}</td>
+                <td><a uk-icon="icon: close" href="{{ path('del_employe', {'id': employe.id }) }}"></a></td>
+                <td><a uk-icon="icon: pencil" href="{{ path('update_employe', {'id': employe.id }) }}"></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

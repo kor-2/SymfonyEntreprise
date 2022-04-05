@@ -169,6 +169,27 @@ class Employe
 
     public function getAdresseComplet()
     {
-        return $this->getAdresse().' '.$this->getVille().' '.$this->getCp();
+        return $this->getAdresse().' - '.$this->getCp().' '.$this->getVille();
+    }
+
+    public function getCollegue()
+    {
+        return $this->getEntreprise()->getEmployes();
+    }
+
+    public function getAge()
+    {
+        $today = new \DateTime();
+        $anniv = $this->getDateNaissance();
+
+        return $today->diff($anniv, true)->format('%Y ans');
+    }
+
+    public function getCarriere()
+    {
+        $today = new \DateTime();
+        $anniv = $this->getDateEmbauche();
+
+        return $today->diff($anniv, true)->format('%y ans %m mois');
     }
 }

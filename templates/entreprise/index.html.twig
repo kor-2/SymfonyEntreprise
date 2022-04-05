@@ -4,11 +4,32 @@
 
 {% block body %}
 
-    <h1>Liste des entreprises</h1>
-    <a href="{{ path('add_entreprise') }}">Ajouter entreprise</a> <br>
-    {% for entreprise in entreprises %}
-        <a href="{{ path('show_entreprise', {'id': entreprise.id }) }}">{{ entreprise }}</a> {{ entreprise.AdresseComplet ~ ' '~ entreprise.DateCreation | date('d/m/Y')}}
-         <a href="{{ path('del_entreprise', {'id': entreprise.id }) }}">Supprimer</a> <a href="{{ path('update_entreprise', {'id': entreprise.id }) }}">Modier</a><br>
-    {% endfor %}
+    <h1>Liste des entreprises ({{ entreprises | length }})</h1>
+    <a class="uk-button uk-button-primary" href="{{ path('add_entreprise') }}">Ajouter entreprise</a> <br>
+
+    <table class="uk-table uk-table-striped uk-table-middle uk-text-center">
+        <thead>
+            <tr>
+                <th class="uk-text-center">Entreprise</th>
+                <th class="uk-text-center">Adresse</th>
+                <th class="uk-text-center">Date de création</th>
+                <th class="uk-text-center">Supprimer</th>
+                <th class="uk-text-center">Modifier</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entreprise in entreprises %}
+            <tr>
+                <td><a href="{{ path('show_entreprise', {'id': entreprise.id }) }}">{{ entreprise }}</a></td>
+                <td>{{ entreprise.AdresseComplet }}</td>
+                <td>{{ entreprise.DateCreation | date('d/m/Y') }}</td>
+                <td><a uk-icon="icon: close" href="{{ path('del_entreprise', {'id': entreprise.id }) }}"></a></td>
+                <td><a uk-icon="icon: pencil" href="{{ path('update_entreprise', {'id': entreprise.id }) }}"></a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
 
 {% endblock %}

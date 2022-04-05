@@ -178,4 +178,12 @@ class Entreprise
     {
         return $this->getAdresse().' '.$this->getVille().' '.$this->getCp();
     }
+
+    public function getAge()
+    {
+        $today = new \DateTime();
+        $anniv = $this->getDateCreation();
+
+        return $today->diff($anniv, true)->format('%y ans %m mois');
+    }
 }

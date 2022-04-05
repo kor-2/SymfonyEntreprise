@@ -7,29 +7,60 @@
 
 <h1>{{ employe }}</h1>
 
-<p>
-    Adresse: {{ employe.AdresseComplet }} <br>
-    Travail à : <a href="{{ path('show_entreprise', {'id': employe.Entreprise.id }) }}">{{ employe.Entreprise }}</a>
-</p>
-<h2>Collègue</h2>
-<table class="uk-table">
+<ul class="uk-list">
+    <li>
+        <span class="uk-text-bold">Entreprise:</span> <a href="{{ path('show_entreprise', {'id': employe.Entreprise.id }) }}">{{ employe.Entreprise }}</a>
+    </li>
+    <li>  
+        <span class="uk-text-bold"> Date d'embauche:</span> {{ employe.DateEmbauche | date('d/m/Y') }} ({{ employe.Carriere }}) 
+    </li>
+    <li>
+        <span class="uk-text-bold">Adresse:</span> {{ employe.AdresseComplet }} 
+    </li>
+    <li>
+        <span class="uk-text-bold">Date de naissance:</span> {{ employe.DateNaissance | date('d/m/Y') }} ({{ employe.age }}) 
+    </li>
+    
+    
+</ul>
+
+<a class="uk-button uk-button-primary" uk-icon="icon: pencil" href="{{ path('update_employe', {'id': employe.id }) }}"></a>
+
+<h2>Collègue ({{ employe.collegue | length - 1 }})</h2>
+
+
+<table class="uk-table uk-table-striped uk-table-middle">
     <thead>
         <tr>
-            <th>Nom</th>    
+            <td>Nom</td>
+            <td>Date d'embauche</td>
+            <td>Ville </td>
         </tr>
     </thead>
     <tbody>
-    
-    {% for collegue in collegues %}
+
+
+    {% for collegue in employe.collegue  %} 
         
-    <tr>
-        <td>{{ collegue }}</td>
-    </tr>
+        {% if collegue.id != employe.id %}
+        
+        <tr>
+            <td><a href="{{ path('show_employe', { 'id' : collegue.id}) }}">{{ collegue }}</a></td>
+            <td>{{ collegue.DateEmbauche | date('d/m/Y') }}</td>
+            <td>{{ collegue.ville }}</td>
+        </tr>
+        {% endif %}
     {% endfor %}
+    
+    
+        
+    
+    
 
 
     </tbody>
 </table>
+
 
 
 {% endblock %}
