@@ -10,6 +10,7 @@
 <a href="{{ path('add_employe') }}">Ajouter employé</a><br>
 
 {% for employe in employes %}
-    <a href="{{ path('show_employe', { 'id' : employe.id}) }}">{{ employe }}</a>{{ ' (' ~ employe.entreprise ~ ')' }} <br>
+    <a href="{{ path('show_employe', { 'id' : employe.id}) }}">{{ employe }}</a>{{ ' (' ~ employe.entreprise ~ ')' }}
+    <a href="{{ path('del_employe', {'id': employe.id }) }}">Supprimer</a> <a href="{{ path('update_employe', {'id': employe.id }) }}">Modier</a><br>
 {% endfor %}
 {% endblock %}

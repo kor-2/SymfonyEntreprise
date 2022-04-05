@@ -17,7 +17,7 @@ class EntrepriseController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine): Response
     {
-        $entreprises = $doctrine->getRepository(Entreprise::class)->findAll();
+        $entreprises = $doctrine->getRepository(Entreprise::class)->findBy([], ['raison_sociale' => 'DESC']);
 
         return $this->render('entreprise/index.html.twig', [
             'entreprises' => $entreprises,
@@ -26,16 +26,41 @@ class EntrepriseController extends AbstractController
 
     /**
      * @Route("/entreprise/add", name="add_entreprise")
+     * @Route("/entreprise/update/{id}", name="update_entreprise")
      */
-    public function add(Request $request): Response
+    public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Request $request): Response
     {
-        $entreprise = new Entreprise();
+        if (!$entreprise) {
+            $entreprise = new Entreprise();
+        }
 
+        $entityManager = $doctrine->getManager();
         $form = $this->createForm(EntrepriseType::class, $entreprise);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entreprise = $form->getData();
+            $entityManager->persist($entreprise);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_entreprise');
+        }
 
         return $this->render('entreprise/add.html.twig', [
             'addEntreprise' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/entreprise/delete/{id}", name="del_entreprise")
+     */
+    public function delete(ManagerRegistry $doctrine, Entreprise $entreprise)
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($entreprise);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_entreprise');
     }
 
     /**

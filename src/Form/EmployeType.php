@@ -17,7 +17,9 @@ class EmployeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
+            ->add('nom', TextType::class, [
+                'attr' => ['class' => 'maClasse'],
+            ])
             ->add('prenom', TextType::class)
             ->add('date_naissance', DateType::class, [
                 'widget' => 'single_text',
@@ -30,6 +32,7 @@ class EmployeType extends AbstractType
             ])
             ->add('entreprise', EntityType::class, [
                 'class' => Entreprise::class,
+                'choice_label' => 'raisonSociale',
             ])
             ->add('Valider', SubmitType::class)
         ;

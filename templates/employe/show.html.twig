@@ -11,6 +11,25 @@
     Adresse: {{ employe.AdresseComplet }} <br>
     Travail à : <a href="{{ path('show_entreprise', {'id': employe.Entreprise.id }) }}">{{ employe.Entreprise }}</a>
 </p>
+<h2>Collègue</h2>
+<table class="uk-table">
+    <thead>
+        <tr>
+            <th>Nom</th>    
+        </tr>
+    </thead>
+    <tbody>
+    
+    {% for collegue in collegues %}
+        
+    <tr>
+        <td>{{ collegue }}</td>
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+</table>
 
 
 {% endblock %}
