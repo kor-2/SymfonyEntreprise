@@ -10,6 +10,69 @@
     <h1>Ajout d'un employé </h1>
 {% endif %}
 
+{{ form_start(addEmploye) }}
 
-{{ form(addEmploye) }}
+{# input nom prenom #}
+    <div class="uk-grid-medium" uk-grid>
+
+        <div class="uk-width-1-2">
+            {{ form_label(addEmploye.nom) }} <br>
+            {{ form_widget(addEmploye.nom) }}
+            
+        </div>
+        <div class="uk-width-1-2">
+            
+            {{ form_label(addEmploye.prenom) }} <br>
+            {{ form_widget(addEmploye.prenom) }}
+            
+        </div>
+        
+    </div>
+
+{# input adresse #}
+    <div>
+        {{ form_row(addEmploye.adresse) }}
+    </div>
+{# input cp ville #}
+    <div class="uk-grid-medium" uk-grid>
+        <div class="uk-width-1-2">
+            {{ form_label(addEmploye.cp) }} <br>
+            {{ form_widget(addEmploye.cp) }}
+        </div>
+        <div class="uk-width-1-2">
+            {{ form_label(addEmploye.ville) }} <br>
+            {{ form_widget(addEmploye.ville) }}
+        </div>
+        
+    </div>
+{# input date_naissance entreprise date_embauche #}
+    <div class="uk-grid-medium" uk-grid>
+        <div class="uk-width-1-3">
+            {{ form_label(addEmploye.date_naissance) }} <br>
+            {{ form_widget(addEmploye.date_naissance) }}
+
+        </div>
+        <div class="uk-width-1-3">
+            {{ form_label(addEmploye.entreprise) }} <br>
+            {{ form_widget(addEmploye.entreprise) }}
+        </div>
+        <div class="uk-width-1-3">
+
+            {{ form_label(addEmploye.date_embauche) }} <br>
+            {{ form_widget(addEmploye.date_embauche) }}
+        </div>
+
+    </div>
+{# input valider #}
+    <div class="uk-text-center uk-margin-top">
+        {{ form_row(addEmploye.Valider) }}
+
+    </div>
+
+
+
+
+
+
+{{ form_end(addEmploye) }}
 {% endblock %}

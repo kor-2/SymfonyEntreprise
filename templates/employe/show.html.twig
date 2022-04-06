@@ -7,6 +7,16 @@
 
 <h1>{{ employe }}</h1>
 
+{% if employe.image == null %}
+{% else %}
+<div>
+    <img src='/uploads/{{ employe.image }}' alt="image employé">
+</div>
+    
+{% endif %}
+
+
+{# Description employé #}
 <ul class="uk-list">
     <li>
         <span class="uk-text-bold">Entreprise:</span> <a href="{{ path('show_entreprise', {'id': employe.Entreprise.id }) }}">{{ employe.Entreprise }}</a>
@@ -20,12 +30,11 @@
     <li>
         <span class="uk-text-bold">Date de naissance:</span> {{ employe.DateNaissance | date('d/m/Y') }} ({{ employe.age }}) 
     </li>
-    
-    
 </ul>
 
 <a class="uk-button uk-button-primary" uk-icon="icon: pencil" href="{{ path('update_employe', {'id': employe.id }) }}"></a>
 
+{# Affichage collegue #}
 <h2>Collègue ({{ employe.collegue | length - 1 }})</h2>
 
 

@@ -174,11 +174,17 @@ class Entreprise
         return $this->getRaisonSociale();
     }
 
+    /**
+     * affichage adresse complète.
+     */
     public function getAdresseComplet()
     {
         return $this->getAdresse().' '.$this->getVille().' '.$this->getCp();
     }
 
+    /**
+     * Calucul de l'age.
+     */
     public function getAge()
     {
         $today = new \DateTime();

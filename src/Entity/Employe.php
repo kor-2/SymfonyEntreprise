@@ -58,6 +58,11 @@ class Employe
      */
     private $entreprise;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -159,6 +164,18 @@ class Employe
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     /**
      * Nouvelle méthodes.
      */
@@ -172,11 +189,17 @@ class Employe
         return $this->getAdresse().' - '.$this->getCp().' '.$this->getVille();
     }
 
+    /**
+     * Avoir les employé.
+     */
     public function getCollegue()
     {
         return $this->getEntreprise()->getEmployes();
     }
 
+    /**
+     * Calcul de l'age.
+     */
     public function getAge()
     {
         $today = new \DateTime();
@@ -185,6 +208,9 @@ class Employe
         return $today->diff($anniv, true)->format('%Y ans');
     }
 
+    /**
+     * Calcule de l'ancienneté de l'employé.
+     */
     public function getCarriere()
     {
         $today = new \DateTime();

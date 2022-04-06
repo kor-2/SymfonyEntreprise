@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h1>{{ name }}</h1>
+<p>
+    Bienvenue dans cette application permettant la gestion d'entreprise et de solariés. Ce projet sert d'introduction à Symfony.
+</p>
+
+<div class="uk-grid-medium" uk-grid>
+    <div class="uk-width-1-2">
+        <div class="uk-card uk-card-default uk-card-body">
+            <h2>Entreprises</h2>
+            <p>{{ entreprises | length }} entreprises </p>
+            <a class="uk-button uk-button-primary" href="{{ path('app_entreprise')}}">Liste des entreprises</a>
+        </div>
+    </div>
+    <div class="uk-width-1-2">
+        <div class="uk-card uk-card-default uk-card-body ">
+            <h2>Employés</h2>
+            <p>{{ employes | length }} entreprises </p>
+            <a class="uk-button uk-button-primary" href="{{ path('app_employe')}}">Liste des employés</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

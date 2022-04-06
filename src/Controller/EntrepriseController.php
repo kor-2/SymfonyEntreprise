@@ -33,7 +33,9 @@ class EntrepriseController extends AbstractController
         if (!$entreprise) {
             $entreprise = new Entreprise();
         }
-
+        /**
+         * Gestion du formulaire d'ajout d'entreprise.
+         */
         $entityManager = $doctrine->getManager();
         $form = $this->createForm(EntrepriseType::class, $entreprise);
         $form->handleRequest($request);
@@ -45,6 +47,7 @@ class EntrepriseController extends AbstractController
 
             return $this->redirectToRoute('app_entreprise');
         }
+        /* fin formulaire d'ajout */
 
         return $this->render('entreprise/add.html.twig', [
             'addEntreprise' => $form->createView(),
